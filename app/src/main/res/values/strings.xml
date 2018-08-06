@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">LAUSD Mileage</string>
     <string name="title_activity_maps">Map</string>
+    <string-array name="address_array">
+        <item>2629 E Jefferson st, Longbeach CA, 90810</item>
+        <item>3124 Josephine St, Lynwood CA, 90262</item>
+    </string-array>
 </resources>
