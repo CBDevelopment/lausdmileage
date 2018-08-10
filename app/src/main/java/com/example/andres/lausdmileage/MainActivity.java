@@ -3,7 +3,6 @@ package com.example.andres.lausdmileage;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -30,11 +29,14 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    Spinner spinner;
+    Spinner start_spinner;
+    Spinner end_spinner;
 
 //Convert address to LatLng
 public LatLng getLocationFromAddress(Context context, String strAddress) {
@@ -60,6 +62,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
     return p1;
 }
+
 //Calculates road distance of two latitudes and longitudes
     public String getDistance(final double lat1, final double lon1, final double lat2, final double lon2){
         final String[] parsedDistance = new String[1];
@@ -69,7 +72,8 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             public void run() {
                 try {
 
-                    URL url = new URL("http://maps.googleapis.com/maps/api/directions/json?origin=" + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=metric&mode=driving");
+                    URL url = new URL("http://maps.googleapis.com/maps/api/directions/json?origin="
+                            + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=metric&mode=driving");
                     final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     InputStream in = new BufferedInputStream(conn.getInputStream());
@@ -81,7 +85,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
                     JSONArray legs = routes.getJSONArray("legs");
                     JSONObject steps = legs.getJSONObject(0);
                     JSONObject distance = steps.getJSONObject("distance");
-                    parsedDistance[0] =distance.getString("text");
+                    parsedDistance[0] = distance.getString("text");
 
                 } catch (ProtocolException e) {
                     e.printStackTrace();
@@ -108,13 +112,18 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView textView = findViewById(R.id.textView);
+        TextView textView = findViewById(R.id.start_textView);
 
-        spinner = findViewById(R.id.spinner);
+        start_spinner = findViewById(R.id.start_spinner);
+        end_spinner = findViewById(R.id.end_spinner);
+
+        //possible dropdown solution to display name of school but pass the address to method
+        //Map<String, String> spinnerMap = new HashMap<String, String>();
 
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.address_array, android.R.layout.simple_spinner_item);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
+        start_spinner.setAdapter(arrayAdapter);
+        end_spinner.setAdapter(arrayAdapter);
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
