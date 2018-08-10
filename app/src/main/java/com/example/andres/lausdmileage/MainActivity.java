@@ -11,7 +11,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -35,8 +38,14 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    Spinner start_spinner;
-    Spinner end_spinner;
+    AutoCompleteTextView start_textView;
+    AutoCompleteTextView end_textView;
+    Button getDistance;
+    TextView textView_showRoadDistance;
+
+    private static final String[] ADDRESSES = new String[]{
+            "2629 E Jefferson St, Longbeach", "3124 Josephine St, Lynwood"
+    };
 
 //Convert address to LatLng
 public LatLng getLocationFromAddress(Context context, String strAddress) {
@@ -107,23 +116,54 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         return parsedDistance[0];
     }
 
+    //Get Strings from text field and return road distance as string
+    public String calculateDistance(String start_address, String end_address) {
+
+        LatLng startLatLng = getLocationFromAddress(this, start_address);
+
+        Location startLocation = new Location("test");
+        startLocation.setLatitude(startLatLng.latitude);
+        startLocation.setLongitude(startLatLng.longitude);
+        startLocation.setTime(new Date().getTime());
+
+        LatLng endLatLng = getLocationFromAddress(this, end_address);
+
+        Location endLocation = new Location("test2");
+        endLocation.setLatitude(endLatLng.latitude);
+        endLocation.setLongitude(endLatLng.longitude);
+        endLocation.setTime(new Date().getTime());
+
+        String travelDistance = getDistance(startLocation.getLatitude(), startLocation.getLongitude(),
+                endLocation.getLatitude(), endLocation.getLongitude());
+
+        return travelDistance;
+
+    }
+
+    public void showDistance(View view) {
+
+            String roadDistance = calculateDistance(start_textView.getText().toString(), end_textView.getText().toString());
+
+            textView_showRoadDistance.setText(roadDistance);
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView textView = findViewById(R.id.start_textView);
-
-        start_spinner = findViewById(R.id.start_spinner);
-        end_spinner = findViewById(R.id.end_spinner);
-
         //possible dropdown solution to display name of school but pass the address to method
         //Map<String, String> spinnerMap = new HashMap<String, String>();
 
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.address_array, android.R.layout.simple_spinner_item);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        start_spinner.setAdapter(arrayAdapter);
-        end_spinner.setAdapter(arrayAdapter);
+        getDistance = findViewById(R.id.btn_getDistance);
+        textView_showRoadDistance = findViewById(R.id.textView_showRoadDistance);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, ADDRESSES);
+        start_textView = findViewById(R.id.start_textView);
+        end_textView = findViewById(R.id.end_textView);
+        start_textView.setAdapter(arrayAdapter);
+        end_textView.setAdapter(arrayAdapter);
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -132,27 +172,6 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 
         }
-
-        LatLng myHome = getLocationFromAddress(this, "2629 E Jefferson St");
-
-        Location location = new Location("test");
-        location.setLatitude(myHome.latitude);
-        location.setLongitude(myHome.longitude);
-        location.setTime(new Date().getTime());
-
-        LatLng oldHome = getLocationFromAddress(this, "3124 Josephine St, Lynwood CA");
-
-        Location location2 = new Location("test2");
-        location2.setLatitude(oldHome.latitude);
-        location2.setLongitude(oldHome.longitude);
-        location2.setTime(new Date().getTime());
-
-        String travelDistance = getDistance(location.getLatitude(), location.getLongitude(), location2.getLatitude(), location2.getLongitude());
-
-        Log.i("test", location.toString());
-        Log.i("test-oldHome", oldHome.toString());
-        Log.i("test-travelDistance", travelDistance);
-
     }
 }
 
