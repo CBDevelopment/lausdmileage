@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Andres\\AndroidStudioProjects\\lausdmileage\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rHK\\values-zh-rHK.xml",
+            "outputFile": "C:\\Users\\Andres\\AndroidStudioProjects\\LAUSDMileage\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rHK\\values-zh-rHK.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Andres\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-15.0.1.aar\\006b32b3be753814fc32396b5f93ae5c\\res\\values-zh-rHK\\values.xml",
