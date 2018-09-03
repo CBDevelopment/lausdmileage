@@ -38,9 +38,40 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     AutoCompleteTextView start_textView;
+    AutoCompleteTextView autoCompleteTextView;
+    AutoCompleteTextView autoCompleteTextView2;
+    AutoCompleteTextView autoCompleteTextView3;
+    AutoCompleteTextView autoCompleteTextView4;
+    AutoCompleteTextView autoCompleteTextView5;
+    AutoCompleteTextView autoCompleteTextView6;
+    AutoCompleteTextView autoCompleteTextView7;
+    AutoCompleteTextView autoCompleteTextView8;
+    AutoCompleteTextView autoCompleteTextView9;
+
     AutoCompleteTextView end_textView;
+    AutoCompleteTextView end_textView2;
+    AutoCompleteTextView end_textView3;
+    AutoCompleteTextView end_textView4;
+    AutoCompleteTextView end_textView5;
+    AutoCompleteTextView end_textView6;
+    AutoCompleteTextView end_textView7;
+    AutoCompleteTextView end_textView8;
+    AutoCompleteTextView end_textView9;
+    AutoCompleteTextView end_textView10;
+
     Button getDistance;
+
     TextView textView_showRoadDistance;
+    TextView textView_showRoadDistance2;
+    TextView textView_showRoadDistance3;
+    TextView textView_showRoadDistance4;
+    TextView textView_showRoadDistance5;
+    TextView textView_showRoadDistance6;
+    TextView textView_showRoadDistance7;
+    TextView textView_showRoadDistance8;
+    TextView textView_showRoadDistance9;
+    TextView textView_showRoadDistance10;
+
     int startTextViewAddressIndex;
     int endTextViewAddressIndex;
 
@@ -159,7 +190,6 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,11 +197,61 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
         getDistance = findViewById(R.id.btn_getDistance);
         textView_showRoadDistance = findViewById(R.id.textView_showRoadDistance);
+        textView_showRoadDistance2 = findViewById(R.id.textView_showRoadDistance2);
+        textView_showRoadDistance3 = findViewById(R.id.textView_showRoadDistance3);
+        textView_showRoadDistance4 = findViewById(R.id.textView_showRoadDistance4);
+        textView_showRoadDistance5 = findViewById(R.id.textView_showRoadDistance5);
+        textView_showRoadDistance6 = findViewById(R.id.textView_showRoadDistance6);
+        textView_showRoadDistance7 = findViewById(R.id.textView_showRoadDistance7);
+        textView_showRoadDistance8 = findViewById(R.id.textView_showRoadDistance8);
+        textView_showRoadDistance9 = findViewById(R.id.textView_showRoadDistance9);
+        textView_showRoadDistance10 = findViewById(R.id.textView_showRoadDistance10);
+
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, SCHOOLNAMES);
         start_textView = findViewById(R.id.start_textView);
+        autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
+        autoCompleteTextView2 = findViewById(R.id.autoCompleteTextView2);
+        autoCompleteTextView3 = findViewById(R.id.autoCompleteTextView3);
+        autoCompleteTextView4 = findViewById(R.id.autoCompleteTextView4);
+        autoCompleteTextView5 = findViewById(R.id.autoCompleteTextView5);
+        autoCompleteTextView6 = findViewById(R.id.autoCompleteTextView6);
+        autoCompleteTextView7 = findViewById(R.id.autoCompleteTextView7);
+        autoCompleteTextView8 = findViewById(R.id.autoCompleteTextView8);
+        autoCompleteTextView9 = findViewById(R.id.autoCompleteTextView9);
+
         end_textView = findViewById(R.id.end_textView);
+        end_textView2 = findViewById(R.id.end_textView2);
+        end_textView3 = findViewById(R.id.end_textView3);
+        end_textView4 = findViewById(R.id.end_textView4);
+        end_textView5 = findViewById(R.id.end_textView5);
+        end_textView6 = findViewById(R.id.end_textView6);
+        end_textView7 = findViewById(R.id.end_textView7);
+        end_textView8 = findViewById(R.id.end_textView8);
+        end_textView9 = findViewById(R.id.end_textView9);
+        end_textView10 = findViewById(R.id.end_textView10);
+
         start_textView.setAdapter(arrayAdapter);
+        autoCompleteTextView.setAdapter(arrayAdapter);
+        autoCompleteTextView2.setAdapter(arrayAdapter);
+        autoCompleteTextView3.setAdapter(arrayAdapter);
+        autoCompleteTextView4.setAdapter(arrayAdapter);
+        autoCompleteTextView5.setAdapter(arrayAdapter);
+        autoCompleteTextView6.setAdapter(arrayAdapter);
+        autoCompleteTextView7.setAdapter(arrayAdapter);
+        autoCompleteTextView8.setAdapter(arrayAdapter);
+        autoCompleteTextView9.setAdapter(arrayAdapter);
+
         end_textView.setAdapter(arrayAdapter);
+        end_textView2.setAdapter(arrayAdapter);
+        end_textView3.setAdapter(arrayAdapter);
+        end_textView4.setAdapter(arrayAdapter);
+        end_textView5.setAdapter(arrayAdapter);
+        end_textView6.setAdapter(arrayAdapter);
+        end_textView7.setAdapter(arrayAdapter);
+        end_textView8.setAdapter(arrayAdapter);
+        end_textView9.setAdapter(arrayAdapter);
+        end_textView10.setAdapter(arrayAdapter);
+
 
         start_textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
