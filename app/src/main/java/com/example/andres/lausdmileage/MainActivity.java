@@ -18,9 +18,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.model.LatLng;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,15 +71,43 @@ public class MainActivity extends AppCompatActivity {
     TextView textView_showRoadDistance10;
 
     int startTextViewAddressIndex;
+    int startTextViewAddressIndex2;
+    int startTextViewAddressIndex3;
+    int startTextViewAddressIndex4;
+    int startTextViewAddressIndex5;
+    int startTextViewAddressIndex6;
+    int startTextViewAddressIndex7;
+    int startTextViewAddressIndex8;
+    int startTextViewAddressIndex9;
+    int startTextViewAddressIndex10;
+
     int endTextViewAddressIndex;
+    int endTextViewAddressIndex2;
+    int endTextViewAddressIndex3;
+    int endTextViewAddressIndex4;
+    int endTextViewAddressIndex5;
+    int endTextViewAddressIndex6;
+    int endTextViewAddressIndex7;
+    int endTextViewAddressIndex8;
+    int endTextViewAddressIndex9;
+    int endTextViewAddressIndex10;
+
 
     private static final String[] SCHOOLNAMES = new String[]{
-            "RESEDA HS", "SOCES MAG", "VANALDEN ES", "CALVERT CHRTR FOR ENR STUDIES", "NORTHRIDGE MS", "STAGG ES", "LORNE ES", "ANATOLA ES", "LEMAY ES",
+            "HOME", "SOTO",
+            "PARK WESTERN ES", "WILLENBERG SP ED CTR", "7TH ST ES", "SOUTH SHORES PER ARTS MG", "TAPER ES", "BARTON HILL ES", "CABRILLO ES",
+            "DANA MS", "15TH ST ES", "LELAND ES", "WHITE POINT ES", "POINT FERMIN ES MAR SCI MAG", "JOHNSTON CDS", "HARBOR CAS", "SAN PEDRO SCI CTR",
+            "OLGUIN HS", "HARBOR OCC CTR", "ALLIANCE BAXTER COLLEGE-READY HS", "SKL CTR-SP/WIL", "PORT OF LOS ANGELES SH", "SAN PEDRO HS", "BANDINI ES"
 
     };
     private static final String[] ADDRESSES = new String[] {
-            "18230 KITTRIDGE ST RESEDA 91335", "18605 ERWIN ST RESEDA 91335", "19019 DELANO ST RESEDA 91335", "19850 DELANO ST WOODLAND HILLS 91367", "17960 CHASE ST NORTHRIDGE 91325",
-            "7839 AMESTOY AVE VAN NUYS 91406", "17440 LORNE ST NORTHRIDGE 91325", "7364 ANATOLA AVE VAN NUYS 91406", "17520 VANOWEN ST VAN NUYS 91406",
+            "2629 E Jefferson St Carson 90810", "2155 N Soto St Los Angeles 90032",
+            "1214 PARK WESTERN SAN PEDRO 90732", "308 WEYMOUTH AVE SAN PEDRO 90731", "1570 W SEVENTH ST SAN PEDRO 90732", "2060 W 35TH ST SAN PEDRO 90732", "1824 TAPER AVE SAN PEDRO 90731",
+            "423 N PACIFIC AVE SAN PEDRO 90731", "732 S CABRILLO AVE SAN PEDRO 90731", "1501 S CABRILLO AVE SAN PEDRO 90731", "1527 S MESA ST SAN PEDRO 90731",
+            "2120 S LELAND ST SAN PEDRO 90731", "1410 SILVIUS AVE SAN PEDRO 90731", "3333 KERCKHOFF AVE SAN PEDRO 90731", "2210 TAPER AVE  S SAN PEDRO 90731",
+            "950 W SANTA CRUZ ST SAN PEDRO 90731", "2201 BARRYWOOD AVE SAN PEDRO 90731", "3210 S ALMA ST SAN PEDRO 90731", "740 N PACIFIC AVE SAN PEDRO 90731",
+            "461 W 9TH ST SAN PEDRO 90731", "920 W 36TH ST BLVD SAN PEDRO 90731", "250 W 5TH ST SAN PEDRO 90731", "1001 W 15TH ST SAN PEDRO 90731",
+            "425 N BANDINI ST SAN PEDRO 90731"
 
 };
 
@@ -180,13 +206,28 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
     public void showDistance(View view) {
 
+        String roadDistance = calculateDistance(ADDRESSES[startTextViewAddressIndex], ADDRESSES[endTextViewAddressIndex]);
+        String roadDistance2 = calculateDistance(ADDRESSES[startTextViewAddressIndex2], ADDRESSES[endTextViewAddressIndex2]);
+        String roadDistance3 = calculateDistance(ADDRESSES[startTextViewAddressIndex3], ADDRESSES[endTextViewAddressIndex3]);
+        String roadDistance4 = calculateDistance(ADDRESSES[startTextViewAddressIndex4], ADDRESSES[endTextViewAddressIndex4]);
+        String roadDistance5 = calculateDistance(ADDRESSES[startTextViewAddressIndex5], ADDRESSES[endTextViewAddressIndex5]);
+        String roadDistance6 = calculateDistance(ADDRESSES[startTextViewAddressIndex6], ADDRESSES[endTextViewAddressIndex6]);
+        String roadDistance7 = calculateDistance(ADDRESSES[startTextViewAddressIndex7], ADDRESSES[endTextViewAddressIndex7]);
+        String roadDistance8 = calculateDistance(ADDRESSES[startTextViewAddressIndex8], ADDRESSES[endTextViewAddressIndex8]);
+        String roadDistance9 = calculateDistance(ADDRESSES[startTextViewAddressIndex9], ADDRESSES[endTextViewAddressIndex9]);
+        String roadDistance10 = calculateDistance(ADDRESSES[startTextViewAddressIndex10], ADDRESSES[endTextViewAddressIndex10]);
 
+        textView_showRoadDistance.setText(roadDistance);
+        textView_showRoadDistance2.setText(roadDistance2);
+        textView_showRoadDistance3.setText(roadDistance3);
+        textView_showRoadDistance4.setText(roadDistance4);
+        textView_showRoadDistance5.setText(roadDistance5);
+        textView_showRoadDistance6.setText(roadDistance6);
+        textView_showRoadDistance7.setText(roadDistance7);
+        textView_showRoadDistance8.setText(roadDistance8);
+        textView_showRoadDistance9.setText(roadDistance9);
+        textView_showRoadDistance10.setText(roadDistance10);
 
-            String roadDistance = calculateDistance(ADDRESSES[startTextViewAddressIndex], ADDRESSES[endTextViewAddressIndex]);
-
-
-
-            textView_showRoadDistance.setText(roadDistance);
 
     }
 
@@ -257,15 +298,174 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                int schoolNameIndex;
-
                 for (int x = 0; x < SCHOOLNAMES.length; x++) {
 
                     if (SCHOOLNAMES[x].equals(start_textView.getText().toString())) {
 
-                        schoolNameIndex = x;
-                        startTextViewAddressIndex = schoolNameIndex;
+                        startTextViewAddressIndex = x;
                         Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView.getText().toString())) {
+
+                        startTextViewAddressIndex2 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex2], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView2.getText().toString())) {
+
+                        startTextViewAddressIndex3 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex3], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView3.getText().toString())) {
+
+                        startTextViewAddressIndex4 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex4], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView4.getText().toString())) {
+
+                        startTextViewAddressIndex5 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex5], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView5.getText().toString())) {
+
+                        startTextViewAddressIndex6 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex6], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView6.getText().toString())) {
+
+                        startTextViewAddressIndex7 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex7], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView7.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView7.getText().toString())) {
+
+                        startTextViewAddressIndex8 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex8], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView8.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView8.getText().toString())) {
+
+                        startTextViewAddressIndex9 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex9], Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+
+            }
+        });
+
+        autoCompleteTextView9.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(autoCompleteTextView9.getText().toString())) {
+
+                        startTextViewAddressIndex10 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex10], Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -278,15 +478,156 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                int schoolNameIndex;
-
                 for (int x = 0; x < SCHOOLNAMES.length; x++) {
 
                     if (SCHOOLNAMES[x].equals(end_textView.getText().toString())) {
 
-                        schoolNameIndex = x;
-                        endTextViewAddressIndex = schoolNameIndex;
+                        endTextViewAddressIndex = x;
                         Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView2.getText().toString())) {
+
+                        endTextViewAddressIndex2 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex2], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView3.getText().toString())) {
+
+                        endTextViewAddressIndex3 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex3], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView4.getText().toString())) {
+
+                        endTextViewAddressIndex4 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex4], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView5.getText().toString())) {
+
+                        endTextViewAddressIndex5 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex5], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView6.getText().toString())) {
+
+                        endTextViewAddressIndex6 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex6], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView7.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView7.getText().toString())) {
+
+                        endTextViewAddressIndex7 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex7], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView8.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView8.getText().toString())) {
+
+                        endTextViewAddressIndex8 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex8], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView9.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView9.getText().toString())) {
+
+                        endTextViewAddressIndex9 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex9], Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+        });
+
+        end_textView10.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+
+                    if (SCHOOLNAMES[x].equals(end_textView10.getText().toString())) {
+
+                        endTextViewAddressIndex10 = x;
+                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex10], Toast.LENGTH_SHORT).show();
 
                     }
                 }

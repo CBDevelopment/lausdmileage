@@ -22,7 +22,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/start_textView"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -32,7 +32,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -42,7 +42,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView2"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -52,7 +52,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView3"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -62,7 +62,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView4"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -72,7 +72,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView5"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -82,7 +82,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView6"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -92,7 +92,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView7"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -102,7 +102,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView8"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -112,7 +112,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/autoCompleteTextView9"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -122,7 +122,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:hint="End Location"
@@ -131,7 +131,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView2"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -141,7 +141,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView3"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -151,7 +151,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView4"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -161,7 +161,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView5"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -171,7 +171,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView6"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -181,7 +181,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView7"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -191,7 +191,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView8"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -201,7 +201,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView9"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -211,7 +211,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/end_textView10"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -221,130 +221,130 @@
 
     <TextView
         android:id="@+id/textView_showRoadDistance"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView"
         app:layout_constraintTop_toTopOf="@+id/end_textView" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance2"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView2"
         app:layout_constraintTop_toTopOf="@+id/end_textView2" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance3"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView3"
         app:layout_constraintTop_toTopOf="@+id/end_textView3" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance4"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView4"
         app:layout_constraintTop_toTopOf="@+id/end_textView4" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance5"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView5"
         app:layout_constraintTop_toTopOf="@+id/end_textView5" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance6"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView6"
         app:layout_constraintTop_toTopOf="@+id/end_textView6" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance7"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView7"
         app:layout_constraintTop_toTopOf="@+id/end_textView7" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance8"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView8"
         app:layout_constraintTop_toTopOf="@+id/end_textView8" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance9"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView9"
         app:layout_constraintTop_toTopOf="@+id/end_textView9" />
 
     <TextView
         android:id="@+id/textView_showRoadDistance10"
-        android:layout_width="123dp"
+        android:layout_width="50dp"
         android:layout_height="18dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:gravity="right"
-        android:text="Road distance"
+        android:text="Miles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/end_textView10"
         app:layout_constraintTop_toTopOf="@+id/end_textView10" />
