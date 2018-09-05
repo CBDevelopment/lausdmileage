@@ -1,4 +1,4 @@
-#Mon Sep 03 21:57:19 PDT 2018
+#Tue Sep 04 21:58:21 PDT 2018
 base.0=C\:\\Users\\Andres\\AndroidStudioProjects\\LAUSDMileage\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\18
 path.0=classes.dex
 renamed.0=classes.dex

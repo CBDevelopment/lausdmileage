@@ -94,14 +94,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String[] SCHOOLNAMES = new String[]{
-            "HOME", "SOTO",
+            "HOME", "SOTO", "LD SOUTH",
             "PARK WESTERN ES", "WILLENBERG SP ED CTR", "7TH ST ES", "SOUTH SHORES PER ARTS MG", "TAPER ES", "BARTON HILL ES", "CABRILLO ES",
             "DANA MS", "15TH ST ES", "LELAND ES", "WHITE POINT ES", "POINT FERMIN ES MAR SCI MAG", "JOHNSTON CDS", "HARBOR CAS", "SAN PEDRO SCI CTR",
             "OLGUIN HS", "HARBOR OCC CTR", "ALLIANCE BAXTER COLLEGE-READY HS", "SKL CTR-SP/WIL", "PORT OF LOS ANGELES SH", "SAN PEDRO HS", "BANDINI ES"
 
     };
     private static final String[] ADDRESSES = new String[] {
-            "2629 E Jefferson St Carson 90810", "2155 N Soto St Los Angeles 90032",
+            "2629 E Jefferson St Carson 90810", "2155 N Soto St Los Angeles 90032", "1149 Magnolia Ave, Gardena 90247",
             "1214 PARK WESTERN SAN PEDRO 90732", "308 WEYMOUTH AVE SAN PEDRO 90731", "1570 W SEVENTH ST SAN PEDRO 90732", "2060 W 35TH ST SAN PEDRO 90732", "1824 TAPER AVE SAN PEDRO 90731",
             "423 N PACIFIC AVE SAN PEDRO 90731", "732 S CABRILLO AVE SAN PEDRO 90731", "1501 S CABRILLO AVE SAN PEDRO 90731", "1527 S MESA ST SAN PEDRO 90731",
             "2120 S LELAND ST SAN PEDRO 90731", "1410 SILVIUS AVE SAN PEDRO 90731", "3333 KERCKHOFF AVE SAN PEDRO 90731", "2210 TAPER AVE  S SAN PEDRO 90731",
@@ -217,7 +217,30 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         String roadDistance9 = calculateDistance(ADDRESSES[startTextViewAddressIndex9], ADDRESSES[endTextViewAddressIndex9]);
         String roadDistance10 = calculateDistance(ADDRESSES[startTextViewAddressIndex10], ADDRESSES[endTextViewAddressIndex10]);
 
-        textView_showRoadDistance.setText(roadDistance);
+            if(startTextViewAddressIndex == 0 || endTextViewAddressIndex == 0){
+
+                String[] roadDistanceSplit = roadDistance.split("mi");
+
+                double roadDistanceDouble = Double.parseDouble(roadDistanceSplit[0]);
+
+                roadDistanceDouble = roadDistanceDouble - 8.5;
+
+                if (roadDistanceDouble < 0) {
+
+                    roadDistanceDouble = 0;
+
+                }
+
+                String roadDistanceString = (Double.toString(roadDistanceDouble));
+
+                String roadDistanceFormat = String.format(roadDistanceString);
+
+                Log.i("number", roadDistanceString);
+
+                textView_showRoadDistance.setText(roadDistanceString);
+
+            }
+
         textView_showRoadDistance2.setText(roadDistance2);
         textView_showRoadDistance3.setText(roadDistance3);
         textView_showRoadDistance4.setText(roadDistance4);
