@@ -24,12 +24,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -93,23 +97,39 @@ public class MainActivity extends AppCompatActivity {
     int endTextViewAddressIndex10;
 
 
-    private static final String[] SCHOOLNAMES = new String[]{
-            "HOME", "SOTO", "LD SOUTH",
-            "PARK WESTERN ES", "WILLENBERG SP ED CTR", "7TH ST ES", "SOUTH SHORES PER ARTS MG", "TAPER ES", "BARTON HILL ES", "CABRILLO ES",
-            "DANA MS", "15TH ST ES", "LELAND ES", "WHITE POINT ES", "POINT FERMIN ES MAR SCI MAG", "JOHNSTON CDS", "HARBOR CAS", "SAN PEDRO SCI CTR",
-            "OLGUIN HS", "HARBOR OCC CTR", "ALLIANCE BAXTER COLLEGE-READY HS", "SKL CTR-SP/WIL", "PORT OF LOS ANGELES SH", "SAN PEDRO HS", "BANDINI ES"
+    ArrayList<String> SCHOOLNAMES = new ArrayList<>();
 
-    };
-    private static final String[] ADDRESSES = new String[] {
-            "2629 E Jefferson St Carson 90810", "2155 N Soto St Los Angeles 90032", "1149 Magnolia Ave, Gardena 90247",
-            "1214 PARK WESTERN SAN PEDRO 90732", "308 WEYMOUTH AVE SAN PEDRO 90731", "1570 W SEVENTH ST SAN PEDRO 90732", "2060 W 35TH ST SAN PEDRO 90732", "1824 TAPER AVE SAN PEDRO 90731",
-            "423 N PACIFIC AVE SAN PEDRO 90731", "732 S CABRILLO AVE SAN PEDRO 90731", "1501 S CABRILLO AVE SAN PEDRO 90731", "1527 S MESA ST SAN PEDRO 90731",
-            "2120 S LELAND ST SAN PEDRO 90731", "1410 SILVIUS AVE SAN PEDRO 90731", "3333 KERCKHOFF AVE SAN PEDRO 90731", "2210 TAPER AVE  S SAN PEDRO 90731",
-            "950 W SANTA CRUZ ST SAN PEDRO 90731", "2201 BARRYWOOD AVE SAN PEDRO 90731", "3210 S ALMA ST SAN PEDRO 90731", "740 N PACIFIC AVE SAN PEDRO 90731",
-            "461 W 9TH ST SAN PEDRO 90731", "920 W 36TH ST BLVD SAN PEDRO 90731", "250 W 5TH ST SAN PEDRO 90731", "1001 W 15TH ST SAN PEDRO 90731",
-            "425 N BANDINI ST SAN PEDRO 90731"
+    ArrayList<String> ADDRESSES = new ArrayList<>();
 
-};
+    //Read CVS file of school names and addresses
+    private void readSchoolData() {
+
+        InputStream inputStream = getResources().openRawResource(R.raw.lausdinfo);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(inputStream, Charset.forName("UTF-8"))
+        );
+
+        String line = "";
+
+        try {
+            //Step over headers
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                //split by ","
+                String[] tokens = line.split(",");
+
+                //read the data
+                SCHOOLNAMES.add(tokens[0]);
+                ADDRESSES.add(tokens[1]);
+
+            }
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error reading data file on line" + line, e);
+            e.printStackTrace();
+
+        }
+    }
 
 //Convert address to LatLng
 public LatLng getLocationFromAddress(Context context, String strAddress) {
@@ -206,6 +226,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
     public void showDistance(View view) {
 
+        /*
         String roadDistance = calculateDistance(ADDRESSES[startTextViewAddressIndex], ADDRESSES[endTextViewAddressIndex]);
         String roadDistance2 = calculateDistance(ADDRESSES[startTextViewAddressIndex2], ADDRESSES[endTextViewAddressIndex2]);
         String roadDistance3 = calculateDistance(ADDRESSES[startTextViewAddressIndex3], ADDRESSES[endTextViewAddressIndex3]);
@@ -217,30 +238,8 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         String roadDistance9 = calculateDistance(ADDRESSES[startTextViewAddressIndex9], ADDRESSES[endTextViewAddressIndex9]);
         String roadDistance10 = calculateDistance(ADDRESSES[startTextViewAddressIndex10], ADDRESSES[endTextViewAddressIndex10]);
 
-            if(startTextViewAddressIndex == 0 || endTextViewAddressIndex == 0){
 
-                String[] roadDistanceSplit = roadDistance.split("mi");
-
-                double roadDistanceDouble = Double.parseDouble(roadDistanceSplit[0]);
-
-                roadDistanceDouble = roadDistanceDouble - 8.5;
-
-                if (roadDistanceDouble < 0) {
-
-                    roadDistanceDouble = 0;
-
-                }
-
-                String roadDistanceString = (Double.toString(roadDistanceDouble));
-
-                String roadDistanceFormat = String.format(roadDistanceString);
-
-                Log.i("number", roadDistanceString);
-
-                textView_showRoadDistance.setText(roadDistanceString);
-
-            }
-
+        textView_showRoadDistance.setText(roadDistance);
         textView_showRoadDistance2.setText(roadDistance2);
         textView_showRoadDistance3.setText(roadDistance3);
         textView_showRoadDistance4.setText(roadDistance4);
@@ -250,7 +249,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         textView_showRoadDistance8.setText(roadDistance8);
         textView_showRoadDistance9.setText(roadDistance9);
         textView_showRoadDistance10.setText(roadDistance10);
-
+        */
 
     }
 
@@ -258,6 +257,14 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        readSchoolData();
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, SCHOOLNAMES);
+
+        Log.i("schoolinfo", String.valueOf(SCHOOLNAMES.indexOf("RISE KO HYANG MS")));
+        Log.i("schoolinfo", String.valueOf(ADDRESSES.indexOf("3020 WILSHIRE BLVD.   SUITE 250 LOS ANGELES 90010")));
 
         getDistance = findViewById(R.id.btn_getDistance);
         textView_showRoadDistance = findViewById(R.id.textView_showRoadDistance);
@@ -271,7 +278,6 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         textView_showRoadDistance9 = findViewById(R.id.textView_showRoadDistance9);
         textView_showRoadDistance10 = findViewById(R.id.textView_showRoadDistance10);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, SCHOOLNAMES);
         start_textView = findViewById(R.id.start_textView);
         autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
         autoCompleteTextView2 = findViewById(R.id.autoCompleteTextView2);
@@ -321,20 +327,18 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(start_textView.getText());
+                startTextViewAddressIndex = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(start_textView.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex);
 
-                        startTextViewAddressIndex = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
 
             }
         });
 
+        /*
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -656,6 +660,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
                 }
             }
         });
+        */
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
