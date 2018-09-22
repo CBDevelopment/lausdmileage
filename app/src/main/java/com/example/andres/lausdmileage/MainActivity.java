@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
     int endTextViewAddressIndex9;
     int endTextViewAddressIndex10;
 
-
     ArrayList<String> SCHOOLNAMES = new ArrayList<>();
 
     ArrayList<String> ADDRESSES = new ArrayList<>();
@@ -160,7 +159,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
     public String getDistance(final double lat1, final double lon1, final double lat2, final double lon2){
         final String[] parsedDistance = new String[1];
         final String[] response = new String[1];
-        Thread thread=new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -180,13 +179,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
                     JSONObject distance = steps.getJSONObject("distance");
                     parsedDistance[0] = distance.getString("text");
 
-                } catch (ProtocolException e) {
-                    e.printStackTrace();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -226,18 +219,20 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
     public void showDistance(View view) {
 
-        /*
-        String roadDistance = calculateDistance(ADDRESSES[startTextViewAddressIndex], ADDRESSES[endTextViewAddressIndex]);
-        String roadDistance2 = calculateDistance(ADDRESSES[startTextViewAddressIndex2], ADDRESSES[endTextViewAddressIndex2]);
-        String roadDistance3 = calculateDistance(ADDRESSES[startTextViewAddressIndex3], ADDRESSES[endTextViewAddressIndex3]);
-        String roadDistance4 = calculateDistance(ADDRESSES[startTextViewAddressIndex4], ADDRESSES[endTextViewAddressIndex4]);
-        String roadDistance5 = calculateDistance(ADDRESSES[startTextViewAddressIndex5], ADDRESSES[endTextViewAddressIndex5]);
-        String roadDistance6 = calculateDistance(ADDRESSES[startTextViewAddressIndex6], ADDRESSES[endTextViewAddressIndex6]);
-        String roadDistance7 = calculateDistance(ADDRESSES[startTextViewAddressIndex7], ADDRESSES[endTextViewAddressIndex7]);
-        String roadDistance8 = calculateDistance(ADDRESSES[startTextViewAddressIndex8], ADDRESSES[endTextViewAddressIndex8]);
-        String roadDistance9 = calculateDistance(ADDRESSES[startTextViewAddressIndex9], ADDRESSES[endTextViewAddressIndex9]);
-        String roadDistance10 = calculateDistance(ADDRESSES[startTextViewAddressIndex10], ADDRESSES[endTextViewAddressIndex10]);
+        Log.i("roadDistance", ADDRESSES.get(startTextViewAddressIndex));
+        Log.i("roadDistance", ADDRESSES.get(endTextViewAddressIndex));
+        Log.i("roadDistance", String.valueOf(startTextViewAddressIndex));
 
+        String roadDistance = calculateDistance((ADDRESSES.get(startTextViewAddressIndex)), ADDRESSES.get(endTextViewAddressIndex));
+        String roadDistance2 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex2), ADDRESSES.get(endTextViewAddressIndex2));
+        String roadDistance3 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex3), ADDRESSES.get(endTextViewAddressIndex3));
+        String roadDistance4 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex4), ADDRESSES.get(endTextViewAddressIndex4));
+        String roadDistance5 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex5), ADDRESSES.get(endTextViewAddressIndex5));
+        String roadDistance6 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex6), ADDRESSES.get(endTextViewAddressIndex6));
+        String roadDistance7 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex7), ADDRESSES.get(endTextViewAddressIndex7));
+        String roadDistance8 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex8), ADDRESSES.get(endTextViewAddressIndex8));
+        String roadDistance9 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex9), ADDRESSES.get(endTextViewAddressIndex9));
+        String roadDistance10 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex10), ADDRESSES.get(endTextViewAddressIndex10));
 
         textView_showRoadDistance.setText(roadDistance);
         textView_showRoadDistance2.setText(roadDistance2);
@@ -249,7 +244,6 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         textView_showRoadDistance8.setText(roadDistance8);
         textView_showRoadDistance9.setText(roadDistance9);
         textView_showRoadDistance10.setText(roadDistance10);
-        */
 
     }
 
@@ -262,9 +256,6 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, SCHOOLNAMES);
-
-        Log.i("schoolinfo", String.valueOf(SCHOOLNAMES.indexOf("RISE KO HYANG MS")));
-        Log.i("schoolinfo", String.valueOf(ADDRESSES.indexOf("3020 WILSHIRE BLVD.   SUITE 250 LOS ANGELES 90010")));
 
         getDistance = findViewById(R.id.btn_getDistance);
         textView_showRoadDistance = findViewById(R.id.textView_showRoadDistance);
@@ -338,22 +329,18 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             }
         });
 
-        /*
+
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView.getText());
+                startTextViewAddressIndex2 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex2);
 
-                        startTextViewAddressIndex2 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex2], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -361,17 +348,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView2.getText());
+                startTextViewAddressIndex3 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView2.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex3);
 
-                        startTextViewAddressIndex3 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex3], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -379,17 +362,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView3.getText());
+                startTextViewAddressIndex4 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView3.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex4);
 
-                        startTextViewAddressIndex4 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex4], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -397,17 +376,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView4.getText());
+                startTextViewAddressIndex5 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView4.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex5);
 
-                        startTextViewAddressIndex5 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex5], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -415,17 +390,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView5.getText());
+                startTextViewAddressIndex6 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView5.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex6);
 
-                        startTextViewAddressIndex6 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex6], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -433,17 +404,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView6.getText());
+                startTextViewAddressIndex7 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView6.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex7);
 
-                        startTextViewAddressIndex7 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex7], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -451,17 +418,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView7.getText());
+                startTextViewAddressIndex8 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView7.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex8);
 
-                        startTextViewAddressIndex8 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex8], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -469,17 +432,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView8.getText());
+                startTextViewAddressIndex9 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView8.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex9);
 
-                        startTextViewAddressIndex9 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex9], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -487,17 +446,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(autoCompleteTextView9.getText());
+                startTextViewAddressIndex10 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(autoCompleteTextView9.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(startTextViewAddressIndex10);
 
-                        startTextViewAddressIndex10 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[startTextViewAddressIndex10], Toast.LENGTH_SHORT).show();
-
-                    }
-
-                }
-
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -505,15 +460,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView.getText());
+                endTextViewAddressIndex = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex);
 
-                        endTextViewAddressIndex = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -521,15 +474,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView2.getText());
+                endTextViewAddressIndex2 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView2.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex2);
 
-                        endTextViewAddressIndex2 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex2], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -537,15 +488,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView3.getText());
+                endTextViewAddressIndex3 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView3.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex3);
 
-                        endTextViewAddressIndex3 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex3], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -553,15 +502,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView4.getText());
+                endTextViewAddressIndex4 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView4.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex4);
 
-                        endTextViewAddressIndex4 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex4], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -569,15 +516,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView5.getText());
+                endTextViewAddressIndex5 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView5.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex5);
 
-                        endTextViewAddressIndex5 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex5], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -585,15 +530,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(start_textView.getText());
+                endTextViewAddressIndex = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView6.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex);
 
-                        endTextViewAddressIndex6 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex6], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -601,15 +544,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView7.getText());
+                endTextViewAddressIndex7 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView7.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex7);
 
-                        endTextViewAddressIndex7 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex7], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -617,15 +558,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView8.getText());
+                endTextViewAddressIndex8 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView8.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex8);
 
-                        endTextViewAddressIndex8 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex8], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -633,15 +572,13 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView9.getText());
+                endTextViewAddressIndex9 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView9.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex9);
 
-                        endTextViewAddressIndex9 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex9], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -649,18 +586,15 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                for (int x = 0; x < SCHOOLNAMES.length; x++) {
+                String schoolSelected;
+                schoolSelected = String.valueOf(end_textView10.getText());
+                endTextViewAddressIndex10 = SCHOOLNAMES.indexOf(schoolSelected);
 
-                    if (SCHOOLNAMES[x].equals(end_textView10.getText().toString())) {
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex10);
 
-                        endTextViewAddressIndex10 = x;
-                        Toast.makeText(MainActivity.this, ADDRESSES[endTextViewAddressIndex10], Toast.LENGTH_SHORT).show();
-
-                    }
-                }
+                Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
         });
-        */
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
