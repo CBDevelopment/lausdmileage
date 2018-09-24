@@ -39,6 +39,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    //https://maps.googleapis.com/maps/api/distancematrix/json?
+    // units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=YOUR_API_KEY
+
     AutoCompleteTextView start_textView;
     AutoCompleteTextView autoCompleteTextView;
     AutoCompleteTextView autoCompleteTextView2;
@@ -96,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
     int endTextViewAddressIndex9;
     int endTextViewAddressIndex10;
 
+    private static final String TAG = "MainActivity";
+
     ArrayList<String> SCHOOLNAMES = new ArrayList<>();
 
     ArrayList<String> ADDRESSES = new ArrayList<>();
@@ -139,7 +144,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
     try {
         // May throw an IOException
-        address = coder.getFromLocationName(strAddress, 5);
+        address = coder.getFromLocationName(strAddress, 1);
         if (address == null) {
             return null;
         }
@@ -159,13 +164,16 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
     public String getDistance(final double lat1, final double lon1, final double lat2, final double lon2){
         final String[] parsedDistance = new String[1];
         final String[] response = new String[1];
-        Thread thread = new Thread(new Runnable() {
+
+        Thread googleThread = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 try {
 
                     URL url = new URL("http://maps.googleapis.com/maps/api/directions/json?origin="
-                            + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=imperial&mode=driving");
+                            + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=imperial&mode=drivingkey==AIzaSyC_mTRR4Nm2Jg8vlkVrDPN8gokEFQRvPWs");
+
                     final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     InputStream in = new BufferedInputStream(conn.getInputStream());
@@ -184,46 +192,44 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
                 }
             }
         });
-        thread.start();
+        googleThread.start();
+        Log.i("distance", String.valueOf(parsedDistance[0]));
+        Log.i("distance", String.valueOf(response[0]));
         try {
-            thread.join();
+            googleThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return parsedDistance[0];
     }
 
-    //Get Strings from text field and return road distance as string
+    //Get addresses and return road distance as string
     public String calculateDistance(String start_address, String end_address) {
 
-        LatLng startLatLng = getLocationFromAddress(this, start_address);
+        LatLng startLatLng = getLocationFromAddress(MainActivity.this, start_address);
 
         Location startLocation = new Location("test");
         startLocation.setLatitude(startLatLng.latitude);
         startLocation.setLongitude(startLatLng.longitude);
         startLocation.setTime(new Date().getTime());
 
-        LatLng endLatLng = getLocationFromAddress(this, end_address);
+        LatLng endLatLng = getLocationFromAddress(MainActivity.this, end_address);
 
         Location endLocation = new Location("test2");
         endLocation.setLatitude(endLatLng.latitude);
         endLocation.setLongitude(endLatLng.longitude);
         endLocation.setTime(new Date().getTime());
 
-        String travelDistance = getDistance(startLocation.getLatitude(), startLocation.getLongitude(),
+        String driveDistance = getDistance(startLocation.getLatitude(), startLocation.getLongitude(),
                 endLocation.getLatitude(), endLocation.getLongitude());
 
-        return travelDistance;
+        return driveDistance;
 
     }
 
     public void showDistance(View view) {
 
-        Log.i("roadDistance", ADDRESSES.get(startTextViewAddressIndex));
-        Log.i("roadDistance", ADDRESSES.get(endTextViewAddressIndex));
-        Log.i("roadDistance", String.valueOf(startTextViewAddressIndex));
-
-        String roadDistance = calculateDistance((ADDRESSES.get(startTextViewAddressIndex)), ADDRESSES.get(endTextViewAddressIndex));
+        String roadDistance = calculateDistance((String.valueOf(ADDRESSES.get(startTextViewAddressIndex))), String.valueOf(ADDRESSES.get(endTextViewAddressIndex)));
         String roadDistance2 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex2), ADDRESSES.get(endTextViewAddressIndex2));
         String roadDistance3 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex3), ADDRESSES.get(endTextViewAddressIndex3));
         String roadDistance4 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex4), ADDRESSES.get(endTextViewAddressIndex4));
@@ -234,17 +240,16 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         String roadDistance9 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex9), ADDRESSES.get(endTextViewAddressIndex9));
         String roadDistance10 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex10), ADDRESSES.get(endTextViewAddressIndex10));
 
-        textView_showRoadDistance.setText(roadDistance);
-        textView_showRoadDistance2.setText(roadDistance2);
-        textView_showRoadDistance3.setText(roadDistance3);
-        textView_showRoadDistance4.setText(roadDistance4);
-        textView_showRoadDistance5.setText(roadDistance5);
-        textView_showRoadDistance6.setText(roadDistance6);
-        textView_showRoadDistance7.setText(roadDistance7);
-        textView_showRoadDistance8.setText(roadDistance8);
-        textView_showRoadDistance9.setText(roadDistance9);
-        textView_showRoadDistance10.setText(roadDistance10);
-
+        textView_showRoadDistance.setText(String.valueOf(roadDistance));
+        textView_showRoadDistance2.setText(String.valueOf(roadDistance2));
+        textView_showRoadDistance3.setText(String.valueOf(roadDistance3));
+        textView_showRoadDistance4.setText(String.valueOf(roadDistance4));
+        textView_showRoadDistance5.setText(String.valueOf(roadDistance5));
+        textView_showRoadDistance6.setText(String.valueOf(roadDistance6));
+        textView_showRoadDistance7.setText(String.valueOf(roadDistance7));
+        textView_showRoadDistance8.setText(String.valueOf(roadDistance8));
+        textView_showRoadDistance9.setText(String.valueOf(roadDistance9));
+        textView_showRoadDistance10.setText(String.valueOf(roadDistance10));
     }
 
     @Override
