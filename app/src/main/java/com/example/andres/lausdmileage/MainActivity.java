@@ -3,9 +3,11 @@ package com.example.andres.lausdmileage;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.icu.text.LocaleDisplayNames;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.util.CrashUtils;
 import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,8 +43,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //https://maps.googleapis.com/maps/api/distancematrix/json?
-    // units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=YOUR_API_KEY
+    //https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyC_mTRR4Nm2Jg8vlkVrDPN8gokEFQRvPWs
 
     AutoCompleteTextView start_textView;
     AutoCompleteTextView autoCompleteTextView;
@@ -134,99 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-//Convert address to LatLng
-public LatLng getLocationFromAddress(Context context, String strAddress) {
-
-    Geocoder coder = new Geocoder(context);
-    List<Address> address;
-    LatLng p1 = null;
-
-    try {
-        // May throw an IOException
-        address = coder.getFromLocationName(strAddress, 1);
-        if (address == null) {
-            return null;
-        }
-
-        Address location = address.get(0);
-        p1 = new LatLng(location.getLatitude(), location.getLongitude() );
-
-    } catch (IOException ex) {
-
-        ex.printStackTrace();
-    }
-
-    return p1;
-}
-
-//Calculates road distance of two latitudes and longitudes
-    public String getDistance(final double lat1, final double lon1, final double lat2, final double lon2){
-        final String[] parsedDistance = new String[1];
-        final String[] response = new String[1];
-
-        Thread googleThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-
-                    URL url = new URL("http://maps.googleapis.com/maps/api/directions/json?origin="
-                            + lat1 + "," + lon1 + "&destination=" + lat2 + "," + lon2 + "&sensor=false&units=imperial&mode=drivingkey==AIzaSyC_mTRR4Nm2Jg8vlkVrDPN8gokEFQRvPWs");
-
-                    final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    InputStream in = new BufferedInputStream(conn.getInputStream());
-                    response[0] = org.apache.commons.io.IOUtils.toString(in, "UTF-8");
-
-                    JSONObject jsonObject = new JSONObject(response[0]);
-                    JSONArray array = jsonObject.getJSONArray("routes");
-                    JSONObject routes = array.getJSONObject(0);
-                    JSONArray legs = routes.getJSONArray("legs");
-                    JSONObject steps = legs.getJSONObject(0);
-                    JSONObject distance = steps.getJSONObject("distance");
-                    parsedDistance[0] = distance.getString("text");
-
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        googleThread.start();
-        Log.i("distance", String.valueOf(parsedDistance[0]));
-        Log.i("distance", String.valueOf(response[0]));
-        try {
-            googleThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return parsedDistance[0];
-    }
-
-    //Get addresses and return road distance as string
-    public String calculateDistance(String start_address, String end_address) {
-
-        LatLng startLatLng = getLocationFromAddress(MainActivity.this, start_address);
-
-        Location startLocation = new Location("test");
-        startLocation.setLatitude(startLatLng.latitude);
-        startLocation.setLongitude(startLatLng.longitude);
-        startLocation.setTime(new Date().getTime());
-
-        LatLng endLatLng = getLocationFromAddress(MainActivity.this, end_address);
-
-        Location endLocation = new Location("test2");
-        endLocation.setLatitude(endLatLng.latitude);
-        endLocation.setLongitude(endLatLng.longitude);
-        endLocation.setTime(new Date().getTime());
-
-        String driveDistance = getDistance(startLocation.getLatitude(), startLocation.getLongitude(),
-                endLocation.getLatitude(), endLocation.getLongitude());
-
-        return driveDistance;
-
-    }
-
+/*
     public void showDistance(View view) {
 
         String roadDistance = calculateDistance((String.valueOf(ADDRESSES.get(startTextViewAddressIndex))), String.valueOf(ADDRESSES.get(endTextViewAddressIndex)));
@@ -251,6 +162,7 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         textView_showRoadDistance9.setText(String.valueOf(roadDistance9));
         textView_showRoadDistance10.setText(String.valueOf(roadDistance10));
     }
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -317,6 +229,9 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
         end_textView8.setAdapter(arrayAdapter);
         end_textView9.setAdapter(arrayAdapter);
         end_textView10.setAdapter(arrayAdapter);
+
+        DownloadTask task = new DownloadTask();
+        task.execute("https:maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyC_mTRR4Nm2Jg8vlkVrDPN8gokEFQRvPWs");
 
 
         start_textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -609,6 +524,75 @@ public LatLng getLocationFromAddress(Context context, String strAddress) {
 
         }
     }
+
+    public class DownloadTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            String response = "";
+            URL url;
+            HttpURLConnection urlConnection = null;
+
+            try {
+                url = new URL(urls[0]);
+
+                urlConnection = (HttpURLConnection) url.openConnection();
+
+                InputStream inputStream = urlConnection.getInputStream();
+
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+                int data = inputStreamReader.read();
+
+                while (data != -1) {
+
+                    char current = (char) data;
+
+                    response += current;
+
+                    data = inputStreamReader.read();
+                }
+
+                return response;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            super.onPostExecute(response);
+
+            try {
+                JSONObject reader = new JSONObject(response);
+
+                JSONArray rowsArray = reader.getJSONArray("rows");
+
+                JSONObject elementObject = rowsArray.getJSONObject(0);
+
+                JSONArray elementsArray = elementObject.getJSONArray("elements");
+
+                JSONObject obj3 = elementsArray.getJSONObject(0);
+
+                JSONObject distanceObj = obj3.getJSONObject("distance");
+
+                String distance = distanceObj.getString("text");
+
+                Log.i("JSONTests", String.valueOf((distance)));
+
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
 }
 
 
