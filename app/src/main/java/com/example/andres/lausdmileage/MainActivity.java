@@ -1,12 +1,8 @@
 package com.example.andres.lausdmileage;
 
 import android.Manifest;
-import android.content.Context;
+import android.app.DownloadManager;
 import android.content.pm.PackageManager;
-import android.icu.text.LocaleDisplayNames;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.textclassifier.TextClassification;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -21,8 +18,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.util.CrashUtils;
-import com.google.android.gms.maps.model.LatLng;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,17 +28,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    //https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyC_mTRR4Nm2Jg8vlkVrDPN8gokEFQRvPWs
 
     AutoCompleteTextView start_textView;
     AutoCompleteTextView autoCompleteTextView;
@@ -102,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
     int endTextViewAddressIndex9;
     int endTextViewAddressIndex10;
 
-    private static final String TAG = "MainActivity";
-
     ArrayList<String> SCHOOLNAMES = new ArrayList<>();
 
     ArrayList<String> ADDRESSES = new ArrayList<>();
@@ -137,19 +124,80 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-/*
+
+    public String calculateRoadDistance (final String start_address,final String end_address) {
+        final String[] parsedDistance = new String[1];
+        final String[] response = new String[1];
+
+        if ((start_address.equals("18230 KITTRIDGE ST RESEDA 91335") & end_address.equals("18230 KITTRIDGE ST RESEDA 91335"))) {
+
+            Log.i("index", "Nothing to show here");
+
+        } else{
+
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        try {
+                            URL url = new URL("https:maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" + start_address + "&destinations=" + end_address + ",NY&key=AIzaSyC_mTRR4Nm2Jg8vlkVrDPN8gokEFQRvPWs");
+
+                            final HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+                            conn.setRequestMethod("POST");
+
+                            InputStream in = new BufferedInputStream(conn.getInputStream());
+
+                            response[0] = org.apache.commons.io.IOUtils.toString(in, "UTF-8");
+
+                            JSONObject reader = new JSONObject(response[0]);
+
+                            JSONArray rowsArray = reader.getJSONArray("rows");
+
+                            JSONObject elementObject = rowsArray.getJSONObject(0);
+
+                            JSONArray elementsArray = elementObject.getJSONArray("elements");
+
+                            JSONObject obj3 = elementsArray.getJSONObject(0);
+
+                            JSONObject distanceObj = obj3.getJSONObject("distance");
+
+                            parsedDistance[0] = distanceObj.getString("text");
+
+                        } catch (IOException | JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                thread.start();
+
+                try {
+
+                    thread.join();
+
+                } catch (InterruptedException e) {
+
+                    e.printStackTrace();
+
+                }
+        }
+
+            return parsedDistance[0];
+    }
+
     public void showDistance(View view) {
 
-        String roadDistance = calculateDistance((String.valueOf(ADDRESSES.get(startTextViewAddressIndex))), String.valueOf(ADDRESSES.get(endTextViewAddressIndex)));
-        String roadDistance2 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex2), ADDRESSES.get(endTextViewAddressIndex2));
-        String roadDistance3 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex3), ADDRESSES.get(endTextViewAddressIndex3));
-        String roadDistance4 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex4), ADDRESSES.get(endTextViewAddressIndex4));
-        String roadDistance5 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex5), ADDRESSES.get(endTextViewAddressIndex5));
-        String roadDistance6 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex6), ADDRESSES.get(endTextViewAddressIndex6));
-        String roadDistance7 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex7), ADDRESSES.get(endTextViewAddressIndex7));
-        String roadDistance8 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex8), ADDRESSES.get(endTextViewAddressIndex8));
-        String roadDistance9 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex9), ADDRESSES.get(endTextViewAddressIndex9));
-        String roadDistance10 = calculateDistance(ADDRESSES.get(startTextViewAddressIndex10), ADDRESSES.get(endTextViewAddressIndex10));
+        String roadDistance = calculateRoadDistance(((ADDRESSES.get(startTextViewAddressIndex))), (ADDRESSES.get(endTextViewAddressIndex)));
+        String roadDistance2 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex2), ADDRESSES.get(endTextViewAddressIndex2));
+        String roadDistance3 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex3), ADDRESSES.get(endTextViewAddressIndex3));
+        String roadDistance4 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex4), ADDRESSES.get(endTextViewAddressIndex4));
+        String roadDistance5 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex5), ADDRESSES.get(endTextViewAddressIndex5));
+        String roadDistance6 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex6), ADDRESSES.get(endTextViewAddressIndex6));
+        String roadDistance7 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex7), ADDRESSES.get(endTextViewAddressIndex7));
+        String roadDistance8 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex8), ADDRESSES.get(endTextViewAddressIndex8));
+        String roadDistance9 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex9), ADDRESSES.get(endTextViewAddressIndex9));
+        String roadDistance10 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex10), ADDRESSES.get(endTextViewAddressIndex10));
 
         textView_showRoadDistance.setText(String.valueOf(roadDistance));
         textView_showRoadDistance2.setText(String.valueOf(roadDistance2));
@@ -161,8 +209,8 @@ public class MainActivity extends AppCompatActivity {
         textView_showRoadDistance8.setText(String.valueOf(roadDistance8));
         textView_showRoadDistance9.setText(String.valueOf(roadDistance9));
         textView_showRoadDistance10.setText(String.valueOf(roadDistance10));
+
     }
-    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -229,10 +277,6 @@ public class MainActivity extends AppCompatActivity {
         end_textView8.setAdapter(arrayAdapter);
         end_textView9.setAdapter(arrayAdapter);
         end_textView10.setAdapter(arrayAdapter);
-
-        DownloadTask task = new DownloadTask();
-        task.execute("https:maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyC_mTRR4Nm2Jg8vlkVrDPN8gokEFQRvPWs");
-
 
         start_textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -454,7 +498,7 @@ public class MainActivity extends AppCompatActivity {
                 schoolSelected = String.valueOf(start_textView.getText());
                 endTextViewAddressIndex = SCHOOLNAMES.indexOf(schoolSelected);
 
-                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex);
+                String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex6);
 
                 Toast.makeText(MainActivity.this, addressOfSchoolSelected , Toast.LENGTH_SHORT).show();
             }
@@ -524,75 +568,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-
-    public class DownloadTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... urls) {
-
-            String response = "";
-            URL url;
-            HttpURLConnection urlConnection = null;
-
-            try {
-                url = new URL(urls[0]);
-
-                urlConnection = (HttpURLConnection) url.openConnection();
-
-                InputStream inputStream = urlConnection.getInputStream();
-
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-
-                int data = inputStreamReader.read();
-
-                while (data != -1) {
-
-                    char current = (char) data;
-
-                    response += current;
-
-                    data = inputStreamReader.read();
-                }
-
-                return response;
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String response) {
-            super.onPostExecute(response);
-
-            try {
-                JSONObject reader = new JSONObject(response);
-
-                JSONArray rowsArray = reader.getJSONArray("rows");
-
-                JSONObject elementObject = rowsArray.getJSONObject(0);
-
-                JSONArray elementsArray = elementObject.getJSONArray("elements");
-
-                JSONObject obj3 = elementsArray.getJSONObject(0);
-
-                JSONObject distanceObj = obj3.getJSONObject("distance");
-
-                String distance = distanceObj.getString("text");
-
-                Log.i("JSONTests", String.valueOf((distance)));
-
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
 }
 
 
