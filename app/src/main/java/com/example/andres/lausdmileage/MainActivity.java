@@ -190,6 +190,25 @@ public class MainActivity extends AppCompatActivity {
             return parsedDistance[0];
     }
 
+    public void checkIfHomeIsSelected(AutoCompleteTextView start_textView, AutoCompleteTextView end_textView, String roadDistance ) {
+
+        if (start_textView.getText().toString().equals("Home") || end_textView.getText().toString().equals("Home")) {
+
+            String[] split = roadDistance.split(" ");
+
+            String number = split[0];
+            String miles = split[1];
+
+            Double numberDouble = Double.parseDouble(number);
+            numberDouble = numberDouble - 1;
+            number = numberDouble.toString();
+
+            roadDistance = number + " " + miles;
+
+        }
+
+    }
+
     public void showDistance(View view) {
 
         String roadDistance = calculateRoadDistance(((ADDRESSES.get(startTextViewAddressIndex))), (ADDRESSES.get(endTextViewAddressIndex)));
@@ -202,6 +221,17 @@ public class MainActivity extends AppCompatActivity {
         String roadDistance8 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex8), ADDRESSES.get(endTextViewAddressIndex8));
         String roadDistance9 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex9), ADDRESSES.get(endTextViewAddressIndex9));
         String roadDistance10 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex10), ADDRESSES.get(endTextViewAddressIndex10));
+
+        checkIfHomeIsSelected(start_textView, end_textView, roadDistance);
+        checkIfHomeIsSelected(autoCompleteTextView, end_textView2, roadDistance2);
+        checkIfHomeIsSelected(autoCompleteTextView2, end_textView3, roadDistance3);
+        checkIfHomeIsSelected(autoCompleteTextView3, end_textView4, roadDistance4);
+        checkIfHomeIsSelected(autoCompleteTextView4, end_textView5, roadDistance5);
+        checkIfHomeIsSelected(autoCompleteTextView5, end_textView6, roadDistance6);
+        checkIfHomeIsSelected(autoCompleteTextView6, end_textView7, roadDistance7);
+        checkIfHomeIsSelected(autoCompleteTextView7, end_textView8, roadDistance8);
+        checkIfHomeIsSelected(autoCompleteTextView8, end_textView9, roadDistance9);
+        checkIfHomeIsSelected(autoCompleteTextView9, end_textView10, roadDistance10);
 
         textView_showRoadDistance.setText(String.valueOf(roadDistance));
         textView_showRoadDistance2.setText(String.valueOf(roadDistance2));

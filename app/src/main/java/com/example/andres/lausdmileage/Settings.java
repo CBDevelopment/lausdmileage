@@ -1,5 +1,6 @@
 package com.example.andres.lausdmileage;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Objects;
 import java.util.function.DoubleUnaryOperator;
@@ -20,6 +22,18 @@ public class Settings extends AppCompatActivity {
     EditText city_EditText;
     EditText zipCode_EditText;
     Button button_Save;
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ONE_WAY_TRIP = "oneWayTrip";
+    public static final String STREET = "street";
+    public static final String CITY = "city";
+    public static final String ZIPCODE = "zipCode";
+
+    private String oneWayTrip;
+    private String street;
+    private String city;
+    private String zipcode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +48,8 @@ public class Settings extends AppCompatActivity {
         zipCode_EditText = findViewById(R.id.zipCode_EditText);
         button_Save = findViewById(R.id.button_Save);
 
-
-
-
+        loadData();
+        updateViews();
 
     }
 
@@ -57,8 +70,46 @@ public class Settings extends AppCompatActivity {
         String city = city_EditText.getText().toString();
         String zipCode = zipCode_EditText.getText().toString();
 
-        Log.i("settings-Address", street + " " + city + " " + zipCode);
+        String address = street + " " + city + " " + zipCode;
+
+        Log.i("settings-Address", address);
+
+        saveData();
 
     }
 
+    public void saveData() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(ONE_WAY_TRIP, oneWayTrip_EditText.getText().toString());
+        editor.putString(STREET, street_EditText.getText().toString());
+        editor.putString(CITY, city_EditText.getText().toString());
+        editor.putString(ZIPCODE, zipCode_EditText.getText().toString());
+
+        editor.apply();
+
+        Toast.makeText(this, "Data Saved", Toast.LENGTH_LONG).show();
+
+    }
+
+    public void loadData() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        oneWayTrip = sharedPreferences.getString(ONE_WAY_TRIP, "");
+        street = sharedPreferences.getString(STREET, "");
+        city = sharedPreferences.getString(CITY, "");
+        zipcode = sharedPreferences.getString(ZIPCODE, "");
+
+    }
+
+    public void updateViews() {
+
+     oneWayTrip_EditText.setText(oneWayTrip);
+     street_EditText.setText(street);
+     city_EditText.setText(city);
+     zipCode_EditText.setText(zipcode);
+
+    }
 }
