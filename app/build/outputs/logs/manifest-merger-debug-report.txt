@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
+ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\b3757b25d1650f7a36e3f74d17644c98\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\dc11fa27306929047f0700337e7836cf\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\988f6a88f55344b8cd8cd45584a1763d\AndroidManifest.xml:17:1-32:12
@@ -19,39 +19,41 @@ MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\Andres\.gra
 MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\8564c5d50b0d3fd2faddaddc96c29dd3\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\946d6cc13679960b457c2d0a019e449d\AndroidManifest.xml:17:1-31:12
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\af6225db5f491e431d91dc5e01175757\AndroidManifest.xml:17:1-30:12
-INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
-INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
+INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
+INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
 	package
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:3:5-46
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:4:5-46
 		INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
 		INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-47:12
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:1-52:12
 		INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:10:5-79
+ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:11:5-79
 	android:name
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:10:22-76
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:11:22-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:12:5-80
+ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:12:5-81
 	android:name
 		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:12:22-78
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:14:5-66
+ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:13:5-67
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\988f6a88f55344b8cd8cd45584a1763d\AndroidManifest.xml:24:5-67
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\988f6a88f55344b8cd8cd45584a1763d\AndroidManifest.xml:24:5-67
 	android:name
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:14:22-64
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:13:22-64
 application
-ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:16:5-45:19
+ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:15:5-50:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\b3757b25d1650f7a36e3f74d17644c98\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\b3757b25d1650f7a36e3f74d17644c98\AndroidManifest.xml:25:5-29:19
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\dc11fa27306929047f0700337e7836cf\AndroidManifest.xml:9:5-20
@@ -83,17 +85,19 @@ MERGED from [com.android.support:support-compat:26.1.0] C:\Users\Andres\.gradle\
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\af6225db5f491e431d91dc5e01175757\AndroidManifest.xml:24:5-28:19
 MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Andres\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\af6225db5f491e431d91dc5e01175757\AndroidManifest.xml:24:5-28:19
 	android:supportsRtl
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:21:9-35
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:20:9-35
 	android:label
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:19:9-41
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:18:9-41
+	tools:ignore
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:22:9-48
 	android:roundIcon
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:20:9-54
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:19:9-54
 	android:icon
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:18:9-43
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:17:9-43
 	android:allowBackup
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:17:9-35
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:16:9-35
 	android:theme
-		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:22:9-40
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:21:9-40
 activity#com.example.andres.lausdmileage.MainActivity
 ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:23:9-29:20
 	android:name
@@ -115,11 +119,19 @@ ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\Andro
 	android:name
 		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:39:13-58
 activity#com.example.andres.lausdmileage.MapsActivity
-ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:42:9-44:68
+ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:42:9-44:59
 	android:label
 		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:44:13-56
 	android:name
 		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:43:13-41
+activity#com.example.andres.lausdmileage.Settings
+ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:45:9-48:57
+	android:parentActivityName
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:48:13-55
+	android:label
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:47:13-37
+	android:name
+		ADDED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml:46:13-37
 uses-sdk
 INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\src\main\AndroidManifest.xml

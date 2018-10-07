@@ -55,6 +55,10 @@
         <activity
             android:name="com.example.andres.lausdmileage.MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity
+            android:name="com.example.andres.lausdmileage.Settings"
+            android:label="Settings"
+            android:parentActivityName="com.example.andres.lausdmileage.MainActivity" />
 
         <meta-data
             android:name="android.support.VERSION"

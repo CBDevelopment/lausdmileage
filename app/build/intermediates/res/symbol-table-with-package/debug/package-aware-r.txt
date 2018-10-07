@@ -714,6 +714,7 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id address_TextView
 id adjust_height
 id adjust_width
 id alertTitle
@@ -735,10 +736,12 @@ id blocking
 id bottom
 id btn_getDistance
 id buttonPanel
+id button_Save
 id cancel_action
 id chains
 id checkbox
 id chronometer
+id city_EditText
 id collapseActionView
 id contentPanel
 id custom
@@ -795,6 +798,7 @@ id normal
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id oneWayTrip_EditText
 id packed
 id parent
 id parentPanel
@@ -821,6 +825,7 @@ id search_plate
 id search_src_text
 id search_voice_btn
 id select_dialog_listview
+id settings
 id shortcut
 id showCustom
 id showHome
@@ -836,6 +841,7 @@ id standard
 id start
 id start_textView
 id status_bar_latest_event_content
+id street_EditText
 id submenuarrow
 id submit_area
 id tabMode
@@ -867,6 +873,7 @@ id wide
 id withText
 id wrap
 id wrap_content
+id zipCode_EditText
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer cancel_button_image_alpha
@@ -902,6 +909,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout activity_main
 layout activity_maps
+layout activity_settings
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -922,6 +930,7 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 layout tooltip
+menu menu
 mipmap ic_launcher
 mipmap ic_launcher_round
 raw lausdinfo

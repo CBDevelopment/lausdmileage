@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Settings">
+
+    <EditText
+        android:id="@+id/oneWayTrip_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="3"
+        android:inputType="numberDecimal"
+        android:numeric="decimal"
+        app:layout_constraintStart_toEndOf="@+id/oneWayTrip_EditText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/oneWayTrip_EditText"
+        android:layout_width="117dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="left|center"
+        android:text="One Way Trip:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/address_TextView"
+        android:layout_width="117dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="left|center"
+        android:text="Home:"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/oneWayTrip_EditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/oneWayTrip_EditText"
+        app:layout_constraintTop_toBottomOf="@+id/oneWayTrip_EditText" />
+
+    <EditText
+        android:id="@+id/street_EditText"
+        android:layout_width="250dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Street"
+        android:inputType="text|textPostalAddress"
+        app:layout_constraintStart_toEndOf="@+id/address_TextView"
+        app:layout_constraintTop_toBottomOf="@+id/oneWayTrip_EditText" />
+
+    <EditText
+        android:id="@+id/city_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="City"
+        android:inputType="textPostalAddress"
+        app:layout_constraintStart_toStartOf="@+id/street_EditText"
+        app:layout_constraintTop_toBottomOf="@+id/street_EditText" />
+
+    <EditText
+        android:id="@+id/zipCode_EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Zip Code"
+        android:inputType="number"
+        android:numeric="integer"
+        app:layout_constraintStart_toStartOf="@+id/city_EditText"
+        app:layout_constraintTop_toBottomOf="@+id/city_EditText" />
+
+    <Button
+        android:id="@+id/button_Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="save"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zipCode_EditText" />
+</android.support.constraint.ConstraintLayout>
