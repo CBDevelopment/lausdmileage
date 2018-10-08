@@ -1,5 +1,6 @@
 package com.example.andres.lausdmileage;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,11 +29,13 @@ public class Settings extends AppCompatActivity {
     public static final String STREET = "street";
     public static final String CITY = "city";
     public static final String ZIPCODE = "zipCode";
+    public static final String ADDRESS = "address";
 
     private String oneWayTrip;
     private String street;
     private String city;
-    private String zipcode;
+    private String zipCode;
+    private String address;
 
 
     @Override
@@ -70,11 +73,16 @@ public class Settings extends AppCompatActivity {
         String city = city_EditText.getText().toString();
         String zipCode = zipCode_EditText.getText().toString();
 
-        String address = street + " " + city + " " + zipCode;
+        address = street + " " + city + " " + zipCode;
 
         Log.i("settings-Address", address);
 
         saveData();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(ONE_WAY_TRIP, oneWayTrip);
+        intent.putExtra(ADDRESS, address);
+        startActivity(intent);
 
     }
 
@@ -87,10 +95,11 @@ public class Settings extends AppCompatActivity {
         editor.putString(STREET, street_EditText.getText().toString());
         editor.putString(CITY, city_EditText.getText().toString());
         editor.putString(ZIPCODE, zipCode_EditText.getText().toString());
+        editor.putString(ADDRESS, address);
 
         editor.apply();
 
-        Toast.makeText(this, "Data Saved", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -100,7 +109,8 @@ public class Settings extends AppCompatActivity {
         oneWayTrip = sharedPreferences.getString(ONE_WAY_TRIP, "");
         street = sharedPreferences.getString(STREET, "");
         city = sharedPreferences.getString(CITY, "");
-        zipcode = sharedPreferences.getString(ZIPCODE, "");
+        zipCode = sharedPreferences.getString(ZIPCODE, "");
+        address = sharedPreferences.getString(ADDRESS, "");
 
     }
 
@@ -109,7 +119,7 @@ public class Settings extends AppCompatActivity {
      oneWayTrip_EditText.setText(oneWayTrip);
      street_EditText.setText(street);
      city_EditText.setText(city);
-     zipCode_EditText.setText(zipcode);
+     zipCode_EditText.setText(zipCode);
 
     }
 }
