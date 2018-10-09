@@ -193,7 +193,9 @@ public class MainActivity extends AppCompatActivity {
             return parsedDistance[0];
     }
 
-    public void checkIfHomeIsSelected(AutoCompleteTextView start_textView, AutoCompleteTextView end_textView, String roadDistance, Double oneWayTrip) {
+    public String checkIfHomeIsSelected(AutoCompleteTextView start_textView, AutoCompleteTextView end_textView, String roadDistance, Double oneWayTrip) {
+
+        String roadDistance1 = roadDistance;
 
         if (start_textView.getText().toString().equals("Home") || end_textView.getText().toString().equals("Home")) {
 
@@ -203,13 +205,13 @@ public class MainActivity extends AppCompatActivity {
             String miles = split[1];
 
             Double numberDouble = Double.parseDouble(number);
-            numberDouble = numberDouble - 1;
+            numberDouble = numberDouble - oneWayTrip;
             number = numberDouble.toString();
 
-            roadDistance = number + " " + miles;
+            roadDistance1 = number + " " + miles;
 
         }
-
+        return roadDistance1;
     }
 
     public void showDistance(View view) {
@@ -225,16 +227,16 @@ public class MainActivity extends AppCompatActivity {
         String roadDistance9 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex9), ADDRESSES.get(endTextViewAddressIndex9));
         String roadDistance10 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex10), ADDRESSES.get(endTextViewAddressIndex10));
 
-        checkIfHomeIsSelected(start_textView, end_textView, roadDistance, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView, end_textView2, roadDistance2, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView2, end_textView3, roadDistance3, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView3, end_textView4, roadDistance4, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView4, end_textView5, roadDistance5, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView5, end_textView6, roadDistance6, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView6, end_textView7, roadDistance7, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView7, end_textView8, roadDistance8, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView8, end_textView9, roadDistance9, oneWayTripDouble);
-        checkIfHomeIsSelected(autoCompleteTextView9, end_textView10, roadDistance10, oneWayTripDouble);
+        roadDistance = checkIfHomeIsSelected(start_textView, end_textView, roadDistance, oneWayTripDouble);
+        roadDistance2 = checkIfHomeIsSelected(autoCompleteTextView, end_textView2, roadDistance2, oneWayTripDouble);
+        roadDistance3 = checkIfHomeIsSelected(autoCompleteTextView2, end_textView3, roadDistance3, oneWayTripDouble);
+        roadDistance4 = checkIfHomeIsSelected(autoCompleteTextView3, end_textView4, roadDistance4, oneWayTripDouble);
+        roadDistance5 = checkIfHomeIsSelected(autoCompleteTextView4, end_textView5, roadDistance5, oneWayTripDouble);
+        roadDistance6 = checkIfHomeIsSelected(autoCompleteTextView5, end_textView6, roadDistance6, oneWayTripDouble);
+        roadDistance7 = checkIfHomeIsSelected(autoCompleteTextView6, end_textView7, roadDistance7, oneWayTripDouble);
+        roadDistance8 = checkIfHomeIsSelected(autoCompleteTextView7, end_textView8, roadDistance8, oneWayTripDouble);
+        roadDistance9 = checkIfHomeIsSelected(autoCompleteTextView8, end_textView9, roadDistance9, oneWayTripDouble);
+        roadDistance10 = checkIfHomeIsSelected(autoCompleteTextView9, end_textView10, roadDistance10, oneWayTripDouble);
 
         textView_showRoadDistance.setText(String.valueOf(roadDistance));
         textView_showRoadDistance2.setText(String.valueOf(roadDistance2));
@@ -315,16 +317,18 @@ public class MainActivity extends AppCompatActivity {
         end_textView9.setAdapter(arrayAdapter);
         end_textView10.setAdapter(arrayAdapter);
 
-        if ((oneWayTripDouble == 0.0) && address.equals("")) {
+        oneWayTripDouble = Double.parseDouble(Settings.getOneWayTrip(this));
+        address = Settings.getAddress(this);
+        Log.i("settings", oneWayTripDouble.toString());
+        Log.i("settings", address);
 
-            Toast.makeText(this, "Go to settings", Toast.LENGTH_LONG).show();
+        SCHOOLNAMES.add("Home");
+        ADDRESSES.add(address);
 
-        } else {
+        if (oneWayTripDouble == 0.0 && address.equals("")) {
 
-            Intent intent = getIntent();
-            String oneWayTrip = intent.getStringExtra(Settings.ONE_WAY_TRIP);
-            oneWayTripDouble = Double.parseDouble(oneWayTrip);
-            address = intent.getStringExtra(Settings.ADDRESS);
+            Intent intent = new Intent(getApplicationContext(), Settings.class);
+            startActivity(intent);
 
         }
 
@@ -545,7 +549,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 String schoolSelected;
-                schoolSelected = String.valueOf(start_textView.getText());
+                schoolSelected = String.valueOf(end_textView6.getText());
                 endTextViewAddressIndex = SCHOOLNAMES.indexOf(schoolSelected);
 
                 String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex6);

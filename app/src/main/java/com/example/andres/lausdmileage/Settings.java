@@ -1,5 +1,6 @@
 package com.example.andres.lausdmileage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -79,11 +80,6 @@ public class Settings extends AppCompatActivity {
 
         saveData();
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(ONE_WAY_TRIP, oneWayTrip);
-        intent.putExtra(ADDRESS, address);
-        startActivity(intent);
-
     }
 
     public void saveData() {
@@ -122,4 +118,18 @@ public class Settings extends AppCompatActivity {
      zipCode_EditText.setText(zipCode);
 
     }
+
+    static public String getOneWayTrip(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
+        return prefs.getString(ONE_WAY_TRIP, "");
+    }
+
+    static public String getAddress(Context context) {
+
+        SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+
+        return prefs.getString(ADDRESS, "");
+    }
+
 }
