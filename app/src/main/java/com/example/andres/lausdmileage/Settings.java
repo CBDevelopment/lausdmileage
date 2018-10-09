@@ -59,27 +59,30 @@ public class Settings extends AppCompatActivity {
 
     public void save(View view) {
 
-        if (oneWayTrip_EditText.getText().toString().equals("")) {
-
-            Log.i("settings-oneWay", "Enter Something");
-
-        } else {
-
-            Double oneWayTripDouble = Double.valueOf(oneWayTrip_EditText.getText().toString());
-            Log.i("settings-D", String.valueOf(oneWayTripDouble));
-
-        }
-
         String street = street_EditText.getText().toString();
         String city = city_EditText.getText().toString();
         String zipCode = zipCode_EditText.getText().toString();
 
         address = street + " " + city + " " + zipCode;
 
-        Log.i("settings-Address", address);
+        if ((oneWayTrip_EditText.getText().toString().equals("")) || (address.equals(""))) {
 
-        saveData();
+            Toast.makeText(this, "Oops, you forgot to fill in some info", Toast.LENGTH_SHORT).show();
 
+        } else {
+
+            street = street_EditText.getText().toString();
+            city = city_EditText.getText().toString();
+            zipCode = zipCode_EditText.getText().toString();
+
+            address = street + " " + city + " " + zipCode;
+
+            saveData();
+
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+
+        }
     }
 
     public void saveData() {
@@ -95,7 +98,7 @@ public class Settings extends AppCompatActivity {
 
         editor.apply();
 
-        Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Got it!", Toast.LENGTH_SHORT).show();
 
     }
 

@@ -7,19 +7,19 @@
     format="10"
     ir-eligibility="COMPATIBLE"
     plugin-version="3.2.0"
-    timestamp="1539047381711"
+    timestamp="1539058293757"
     token="7064897858807556403"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="237" />
+        duration="236" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="13" />
+        duration="14" />
     <task
         name="verifier"
         duration="3" />
@@ -30,11 +30,8 @@
 
     <build
         build-mode="FULL"
-        timestamp="1539041736332"
+        timestamp="1539057121458"
         verifier="FULL_BUILD_REQUESTED" >
-        <artifact
-            location="C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
-            type="SPLIT" />
         <artifact
             location="C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
             type="SPLIT" />
@@ -66,6 +63,9 @@
             location="C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
         <artifact
+            location="C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+            type="SPLIT" />
+        <artifact
             location="C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
             type="SPLIT" />
         <artifact
@@ -75,7 +75,7 @@
     <build
         build-mode="COLD"
         ir-eligibility="COMPATIBLE"
-        timestamp="1539047381711"
+        timestamp="1539058293757"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\Andres\AndroidStudioProjects\lausdmileage\app\build\intermediates\split-apk\debug\slices\slice_6.apk"

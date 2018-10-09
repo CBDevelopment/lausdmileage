@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     Double oneWayTripDouble = 0.0;
     String address = "";
+    String oneWayTrip;
 
     ArrayList<String> SCHOOLNAMES = new ArrayList<>();
 
@@ -216,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void showDistance(View view) {
 
+        oneWayTripDouble = Double.parseDouble(oneWayTrip);
+
         String roadDistance = calculateRoadDistance(((ADDRESSES.get(startTextViewAddressIndex))), (ADDRESSES.get(endTextViewAddressIndex)));
         String roadDistance2 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex2), ADDRESSES.get(endTextViewAddressIndex2));
         String roadDistance3 = calculateRoadDistance(ADDRESSES.get(startTextViewAddressIndex3), ADDRESSES.get(endTextViewAddressIndex3));
@@ -317,9 +320,9 @@ public class MainActivity extends AppCompatActivity {
         end_textView9.setAdapter(arrayAdapter);
         end_textView10.setAdapter(arrayAdapter);
 
-        oneWayTripDouble = Double.parseDouble(Settings.getOneWayTrip(this));
+        oneWayTrip = Settings.getOneWayTrip(this);
         address = Settings.getAddress(this);
-        Log.i("settings", oneWayTripDouble.toString());
+        Log.i("settings", oneWayTrip);
         Log.i("settings", address);
 
         SCHOOLNAMES.add("Home");
@@ -550,7 +553,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String schoolSelected;
                 schoolSelected = String.valueOf(end_textView6.getText());
-                endTextViewAddressIndex = SCHOOLNAMES.indexOf(schoolSelected);
+                endTextViewAddressIndex6 = SCHOOLNAMES.indexOf(schoolSelected);
 
                 String addressOfSchoolSelected = ADDRESSES.get(endTextViewAddressIndex6);
 
