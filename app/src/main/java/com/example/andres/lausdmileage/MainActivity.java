@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     AutoCompleteTextView end_textView10;
 
     Button getDistance;
+    Button button_clear;
 
     TextView textView_showRoadDistance;
     TextView textView_showRoadDistance2;
@@ -198,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
 
         String roadDistance1 = roadDistance;
 
-        if (start_textView.getText().toString().equals("Home") || end_textView.getText().toString().equals("Home")) {
+        if ((start_textView.getText().toString().equals("Home")) || (end_textView.getText().toString().equals("Home"))) {
 
             String[] split = roadDistance.split(" ");
 
@@ -254,6 +255,65 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void clear(View view) {
+
+        start_textView.setText("");
+        autoCompleteTextView.setText("");
+        autoCompleteTextView2.setText("");
+        autoCompleteTextView3.setText("");
+        autoCompleteTextView4.setText("");
+        autoCompleteTextView5.setText("");
+        autoCompleteTextView6.setText("");
+        autoCompleteTextView7.setText("");
+        autoCompleteTextView8.setText("");
+        autoCompleteTextView9.setText("");
+
+        end_textView.setText("");
+        end_textView2.setText("");
+        end_textView3.setText("");
+        end_textView4.setText("");
+        end_textView5.setText("");
+        end_textView6.setText("");
+        end_textView7.setText("");
+        end_textView8.setText("");
+        end_textView9.setText("");
+        end_textView10.setText("");
+
+        textView_showRoadDistance.setText("-");
+        textView_showRoadDistance2.setText("-");
+        textView_showRoadDistance3.setText("-");
+        textView_showRoadDistance4.setText("-");
+        textView_showRoadDistance5.setText("-");
+        textView_showRoadDistance6.setText("-");
+        textView_showRoadDistance7.setText("-");
+        textView_showRoadDistance8.setText("-");
+        textView_showRoadDistance9.setText("-");
+        textView_showRoadDistance10.setText("-");
+
+        startTextViewAddressIndex = 0;
+        startTextViewAddressIndex2 = 0;
+        startTextViewAddressIndex3 = 0;
+        startTextViewAddressIndex4 = 0;
+        startTextViewAddressIndex5 = 0;
+        startTextViewAddressIndex6 = 0;
+        startTextViewAddressIndex7 = 0;
+        startTextViewAddressIndex8 = 0;
+        startTextViewAddressIndex9 = 0;
+        startTextViewAddressIndex10 = 0;
+
+        endTextViewAddressIndex = 0;
+        endTextViewAddressIndex2 = 0;
+        endTextViewAddressIndex3 = 0;
+        endTextViewAddressIndex4 = 0;
+        endTextViewAddressIndex5 = 0;
+        endTextViewAddressIndex6 = 0;
+        endTextViewAddressIndex7 = 0;
+        endTextViewAddressIndex8 = 0;
+        endTextViewAddressIndex9 = 0;
+        endTextViewAddressIndex10 = 0;
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -265,6 +325,7 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_dropdown_item_1line, SCHOOLNAMES);
 
         getDistance = findViewById(R.id.btn_getDistance);
+        button_clear = findViewById(R.id.button_clear);
         textView_showRoadDistance = findViewById(R.id.textView_showRoadDistance);
         textView_showRoadDistance2 = findViewById(R.id.textView_showRoadDistance2);
         textView_showRoadDistance3 = findViewById(R.id.textView_showRoadDistance3);

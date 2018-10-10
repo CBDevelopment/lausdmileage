@@ -737,6 +737,7 @@ id bottom
 id btn_getDistance
 id buttonPanel
 id button_Save
+id button_clear
 id cancel_action
 id chains
 id checkbox
