@@ -31,6 +31,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -195,6 +197,14 @@ public class MainActivity extends AppCompatActivity {
             return parsedDistance[0];
     }
 
+    private static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = new BigDecimal(Double.toString(value));
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
     public String checkIfHomeIsSelected(AutoCompleteTextView start_textView, AutoCompleteTextView end_textView, String roadDistance, Double oneWayTrip) {
 
         String roadDistance1 = roadDistance;
@@ -208,7 +218,8 @@ public class MainActivity extends AppCompatActivity {
 
             Double numberDouble = Double.parseDouble(number);
             numberDouble = numberDouble - oneWayTrip;
-            number = numberDouble.toString();
+            Double roundedNumber = round(numberDouble, 1);
+            number = roundedNumber.toString();
 
             roadDistance1 = number + " " + miles;
 
